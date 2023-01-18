@@ -1,28 +1,38 @@
-
+import { useEffect, useState } from 'react';
+import video from './coverr-purple.mp4';
 import './App.css';
-import { useState } from 'react';
 
-function App() {
+function App() { 
 
-  const [book, setBook] = useState({
-    title: "$100 Startup",
-    author: "Chris Janu",
-    year: 2010,
-    rating: "3 stars"
-  })
+  const[tips, setTips] = useState("");
 
-  const changeRating = () => {
-    setBook({...book, year: 2020})
-  }
+
+  useEffect(() => {
+    getTips()
+  }, [])
+    const getTips = async () => {
+      const response = await fetch (`http://www.boredapi.com/api/activity/ `);
+      const data = await response.json();
+      setTips(data.activity);
+    };
+    
 
   return (
     <div className="App">
-    <h2>{book.title}</h2> 
-    <h2>{book.author}</h2>
-    <h2>{book.year}</h2>
-    <h2>{book.rating}</h2>
-    <button onClick={changeRating}>Click here</button>
+     <div className='container'>
+     <video autoPlay muted loop>
+      <source src={video} type="video/mp4"/>
+      </video>
+      <h1>Ask Me And Get An Inspiration...</h1>
+     </div>
+        <div className='container'>
+      <button className='button-85' onClick={getTips}>A S K</button>
+      </div>
+      <div className='container'>
+     <p className='tips'>{tips}</p>
+     </div>
     </div>
+    
   );
 }
 
