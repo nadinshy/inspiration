@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import video from './coverr-purple.mp4';
+import video from './earth-small.mp4';
 import './App.css';
 
 function App() { 
